@@ -24,12 +24,12 @@ public class ProductoController {
 		this.productoService= productoService;
 	}//constructor
 	
-	@GetMapping
+	@GetMapping //http://127.0.0.1:8080/api/productos/
 	public List<Producto> getAllProducts(){
 		return productoService.getAllProductos();
 	}//getAllProducts
 	
-	@GetMapping(path="{prodId}")
+	@GetMapping(path="{prodId}") //http://127.0.0.1:8080/api/productos/4
 	public Producto getProduct(@PathVariable("prodId") Long id) {
 		return productoService.getProducto(id);
 	}//getProduct
@@ -49,11 +49,11 @@ public class ProductoController {
 		@RequestParam(required= false)	String descripcion,
 		@RequestParam(required= false)	String imagen,
 		@RequestParam(required= false)	Double precio,
-		@RequestParam(required= false)	int cantidad,
-		@RequestParam(required= false)	String categoria
+		@RequestParam(required= false)	Integer cantidad,
+		@RequestParam(required= false)	Long categoria_id
 			) {
 		
-		return productoService.updateProducto(id, nombre, descripcion, imagen, precio, cantidad, categoria );
+		return productoService.updateProducto(id, nombre, descripcion, imagen, precio, cantidad, categoria_id );
 	}
 	
-}
+}//class_ProductoControlle
