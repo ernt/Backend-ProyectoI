@@ -1,17 +1,38 @@
 package org.generation.ecommerce.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="usuarios")
 public class Usuario {
-//	int id ; se agregara con la base de datos 
-	private String nombre;
-	private String apellido ; 
-	private String password;
-	private String boleta;
-	private String correo;
-	private String telefono;
-	private String rol;
-	private String foto ;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true,nullable=false)
 	private long id ; 
-	private static long total=0;
+	@Column(nullable=false)
+	private String nombre;
+	@Column(nullable=false)
+	private String apellido ; 
+	@Column(nullable=false)
+	private String password;
+	@Column(nullable=false)
+	private String boleta;
+	@Column(nullable=false)
+	private String correo;
+	
+	private String telefono;
+	
+	private String rol;
+	
+	private String foto ;
+	
+	
 	
 	public Usuario(String nombre, String apellido, String password, String boleta, String correo, String telefono,
 			String rol, String foto) {
@@ -24,13 +45,10 @@ public class Usuario {
 		this.telefono = telefono;
 		this.rol = rol;
 		this.foto = foto;
-		total++;
-		id=Usuario.total;
 	}
 	
 	public Usuario() {
-		total++;
-		id=Usuario.total;
+	
 	}
 
 	public String getNombre() {
@@ -106,19 +124,16 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public static long getTotal() {
-		return total;
-	}
-
-	public static void setTotal(long total) {
-		Usuario.total = total;
-	}
-
 	@Override
 	public String toString() {
-		return "Usuarios [nombre=" + nombre + ", apellido=" + apellido + ", password=" + password + ", boleta=" + boleta
-				+ ", correo=" + correo + ", telefono=" + telefono + ", rol=" + rol + ", foto=" + foto + "]";
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", password=" + password
+				+ ", boleta=" + boleta + ", correo=" + correo + ", telefono=" + telefono + ", rol=" + rol + ", foto="
+				+ foto + "]";
 	}
+
+
+
+
 	
 	
 	

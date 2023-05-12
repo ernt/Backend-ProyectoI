@@ -1,3 +1,6 @@
 .settings/
-.project/
+.project
+### Sensitive Data ###
+ecommerce/src/main/resources/application.properties
+
 
