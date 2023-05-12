@@ -1,81 +1,66 @@
 package org.generation.ecommerce.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.generation.ecommerce.model.Producto;
+import org.generation.ecommerce.service.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+
 @Service
 public class ProductoService {
-    private final ArrayList<Producto> lista = new ArrayList<>();
-    private static long total = 0;
-//Producto(String nombre, String descripcion, String imagen, double precio, int cantidad, String categoria)
-    @Autowired
-    public ProductoService() {
-    		lista.add(new Producto("Gorra","Gorrita fachera facherita","imgCargado",55.6,5,"Ropa"));
-    		lista.add(new Producto("Lentes","lentes de sol mamalones para playa","imgCargado",57.8,7,"Accesorios"));
-    		lista.add(new Producto("Playera","Playera de algodon recien horneada","imgCargado",33.5,9,"Ropa"));
-    		lista.add(new Producto("Dildo","Dildo del negro de whatsap","imgCargado",36.7,10,"SexShop"));
-    }// constructor default
+	private final ProductoRepository productoRepository;
 
-    public ArrayList<Producto> getAllProductos() {
-        return lista;
-    }
+    @Autowired
+	public ProductoService(ProductoRepository productoRepository) {
+		this.productoRepository=productoRepository;
+	}//contructor_
+    public List<Producto> getAllProductos(){
+    	return productoRepository.findAll();
+    }//getAllProductos
+
 
     public Producto getProducto(Long id) {
-        Producto tmpProd = null;
-        for (Producto producto : lista) {
-            if (producto.getId() == id) {
-                tmpProd = producto;
-            }
-        }
-        return tmpProd;
-    }
+		return productoRepository.findById(id).orElseThrow(
+				()->new IllegalArgumentException("El Producto con id "+
+						id + " no existe")
+				);//()->Funcion_flecha_que_lanza_la_excepcion
+    }//getProducto
 
     public Producto deleteProducto(Long id) {
-        Producto tmpProd = null;
-        for (Producto producto : lista) {
-            if (producto.getId() == id) {
-                tmpProd = producto;
-                lista.remove(lista.indexOf(producto));
-                break;
-            }
-        }
-        return tmpProd;
-    }
+    	Producto tmpProd = null;
+		if(productoRepository.existsById(id)) {
+			tmpProd = productoRepository.findById(id).get();
+			productoRepository.deleteById(id);
+		}//if
+		return tmpProd;
+    }//deleteProducto
 
     public Producto addProducto(Producto producto) {
-        total = lista.size(); // obtener el número actual de productos en la lista
-        total++; // incrementar en 1 el contador de IDs
-        producto.setId(total);
-        lista.add(producto);
-        return producto;
-    }
+    	return productoRepository.save(producto);
+    }//addProducto
 
 
     public Producto updateProducto(Long id, String nombre, String descripcion, String imagen, Double precio,
-                                   int cantidad, String categoria) {
+                                   Integer cantidad, Long categoria_id) {
         Producto tmpProd = null;
-        for (Producto producto : lista) {
-            if (producto.getId() == id) {
-                if (nombre != null)
-                    producto.setNombre(nombre);
-                if (descripcion != null)
-                    producto.setDescripcion(descripcion);
-                if (imagen != null)
-                    producto.setImagen(imagen);
-                if (precio != null)
-                    producto.setPrecio(precio);
-                if (cantidad > 0)
-                    producto.setCantidad(cantidad);
-                if (categoria != null)
-                    producto.setCategoria(categoria);
-                tmpProd = producto;
-                break;
-            }
-        }
-        return tmpProd;
-    }
 
-}// clase ProductoService
+		if (productoRepository.existsById(id)) {
+			tmpProd = productoRepository.findById(id).get();
+			if (nombre != null) tmpProd.setNombre(nombre);
+			if (descripcion != null) tmpProd.setDescripcion(descripcion);
+			if (imagen != null) tmpProd.setImagen(imagen);
+			if (precio != null) tmpProd.setPrecio(precio.doubleValue());
+			if (cantidad != 0) tmpProd.setCantidad(cantidad);
+			if (categoria_id != null) tmpProd.setCategoria_id(categoria_id);
+			productoRepository.save(tmpProd);
+		}else {
+			System.out.println("Update - El Producto con Id "
+					+ id + " no existe");
+		}//else
+		return tmpProd;
+    }//updateProducto
+}//class_ProductoService
