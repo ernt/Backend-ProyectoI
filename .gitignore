@@ -1,3 +1,6 @@
 .settings/
-.project/
-application.properties
+.project
+### Sensitive Data ###
+src/main/resources/application.properties
+
+

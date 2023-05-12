@@ -16,6 +16,8 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+### Sensitive Data ###
+src/main/resources/application.properties
 
 ### IntelliJ IDEA ###
 .idea
@@ -33,5 +35,10 @@ out/
 /nbdist/
 /.nb-gradle/
 
+###Eclipse###
+.settings/
+.project/
+### Sensitive Data ###
+src/main/resources/application.properties
 ### VS Code ###
 .vscode/
