@@ -1,20 +1,29 @@
 package org.generation.ecommerce.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table (name="categorias")
 public class Categorias {
-	private String nombreCategoria;
+	@Id
+	@GeneratedValue (strategy=GenerationType.IDENTITY)
+	@Column (name="id", unique = true, nullable = false)
 	private long id;
-	private static long total=0;
-	
+	@Column (nullable=false)
+	private String nombreCategoria;
+
+	//Maquillaje, Calzado, Vestimenta, Accesorios, SexShop, Mascotas, Varios
 	public Categorias(String nombreCategoria) {
 		super();
 		this.nombreCategoria = nombreCategoria;
-		total++;
-		id= Categorias.total;
 	} //Constructor
 	
 	public Categorias() {
-		total++;
-		id=Categorias.total;
 	}//constructor
 
 	public String getNombreCategoria() {
