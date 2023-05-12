@@ -23,7 +23,6 @@ public class ControllerCategorias {
 	@Autowired
 	public ControllerCategorias(CategoriasService categoriasService) {
 		this.categoriasService = categoriasService;
-	
 	}
 	
 	@GetMapping
