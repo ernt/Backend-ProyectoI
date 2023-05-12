@@ -1,71 +1,63 @@
 package org.generation.ecommerce.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.generation.ecommerce.model.Categorias;
+import org.generation.ecommerce.repository.CategoriasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class CategoriasService {
-	public final ArrayList<Categorias> lista = new ArrayList<>();
+	public final CategoriasRepository categoriasRepository;
+	
 	@Autowired
-	public CategoriasService() {
-		lista.add(new Categorias("Maquillaje"));
-		lista.add(new Categorias("Mascotas"));
-		lista.add(new Categorias("SexShop"));
-		lista.add(new Categorias("Accesorios"));
-		lista.add(new Categorias("Calzado"));
-		lista.add(new Categorias("Vestimenta"));
-		lista.add(new Categorias("Varios"));
+	public CategoriasService(CategoriasRepository categoriasRepository) {
+		this.categoriasRepository = categoriasRepository;
 	}//Constructor
 	
-	public ArrayList<Categorias>getAllCategorias(){
-		return lista;
-	}//getAllCategorias
+	public List<Categorias>getAllCategorias(){
+		return categoriasRepository.findAll();
+	}//getAllCategorias Repository
 
 	public Categorias getCategorias(Long id) {
 		// TODO Auto-generated method stub
-		Categorias tmpCat = null;
-		for(Categorias categoria: lista) {
-			if(categoria.getId()==id) {
-				tmpCat = categoria;
-			}//if
-		}//foreach
-		return tmpCat;
-	}//getCategorias
+		return categoriasRepository.findById(id).orElseThrow(
+				() -> new IllegalArgumentException("La categoria con id " + id + " no existe"));
+	}//getCategorias Repository
 
 	public Categorias deleteCategorias(Long id) {
 		// TODO Auto-generated method stub
 		Categorias tmpCat = null;
-		for(Categorias categoria: lista) {
-			if(categoria.getId()==id) {
-				tmpCat = lista.remove(lista.indexOf(categoria));
-				break;
+			if(categoriasRepository.existsById(id)) {
+				tmpCat = categoriasRepository.findById(id).get();
+				categoriasRepository.deleteById(id);
 			}//if
-		}//foreach
 		return tmpCat;
-	}//deleteCategoria
+	}//deleteCategoria Repository
 
 	public Categorias addCategoria(Categorias categoria) {
 		// TODO Auto-generated method stub
-		lista.add(categoria);
-		return categoria; 
-	}//addCategoria
+		Categorias tmpCat = null;
+		if(categoriasRepository.findBynombreCategoria(categoria.getNombreCategoria()).isEmpty()) {
+			tmpCat = categoriasRepository.save(categoria);
+		} //if
+		return tmpCat; 
+	}//addCategoria Repository
 
 	public Categorias updateCategoria(Long id, String nombreCategoria) {
 		// TODO Auto-generated method stub
 		Categorias tmpCat = null;
-		for(Categorias categoria: lista) {
-			if(categoria.getId()==id) {
-				if(nombreCategoria!=null) categoria.setNombreCategoria(nombreCategoria);
-				tmpCat = categoria;
-				break;
-			}//if
-		}//foreach
+		if(categoriasRepository.existsById(id)) {
+			tmpCat = categoriasRepository.findById(id).get();
+			if (nombreCategoria!=null) tmpCat.setNombreCategoria(nombreCategoria);
+			categoriasRepository.save(tmpCat);
+		}else {
+			System.out.println("Update - La categoria con id " + id + " no existe");
+		}//if else 
 		return tmpCat;
-	}//updateCategoria
+	}//updateCategoria Repository
 
 	
 	
