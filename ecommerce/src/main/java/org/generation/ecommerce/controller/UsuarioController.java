@@ -2,6 +2,7 @@ package org.generation.ecommerce.controller;
 
 import java.util.List;
 
+import org.generation.ecommerce.model.ChangePassword;
 import org.generation.ecommerce.model.Usuario;
 import org.generation.ecommerce.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,16 +50,14 @@ public class UsuarioController {
 	
 	@PutMapping(path="{userId}")
 	public Usuario updateUsario(@PathVariable("userId")Long id,
-			@RequestParam(required=false) String nombre,
-			@RequestParam(required=false)String apellido,
-			@RequestParam(required=false)String password,
-			@RequestParam(required=false) String boleta ,
-			@RequestParam(required=false) String correo,
+			@RequestBody ChangePassword changePassword) {
+		return usuarioService.updateUsuario(id,changePassword);
+	}
+	@PutMapping(path="{userId}/edit")
+	public Usuario updateUsarioOther(@PathVariable("userId")Long id,
 			@RequestParam(required=false) String telefono,
 			@RequestParam(required=false) String rol,
-			@RequestParam(required=false) String foto)
-	
-	{
-		return usuarioService.updateUsuario(id,nombre,apellido,password,boleta,correo,telefono,rol,foto);
+			@RequestParam(required=false) String foto) {
+		return usuarioService.updateUsuarioOther(id,rol,foto,telefono);
 	}
 }
