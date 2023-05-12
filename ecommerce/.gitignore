@@ -33,5 +33,12 @@ out/
 /nbdist/
 /.nb-gradle/
 
+###Eclipse###
+.settings/
+.project/
+### Sensitive Data ###
+src/main/resources/application.properties
+
+
 ### VS Code ###
 .vscode/
