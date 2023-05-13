@@ -1,4 +1,4 @@
-package org.generation.ecommerce.service.repository;
+package org.generation.ecommerce.repository;
 
 import org.generation.ecommerce.model.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
