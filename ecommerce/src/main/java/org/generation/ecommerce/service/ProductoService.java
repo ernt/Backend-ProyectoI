@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.generation.ecommerce.model.Producto;
-import org.generation.ecommerce.service.repository.ProductoRepository;
+import org.generation.ecommerce.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
