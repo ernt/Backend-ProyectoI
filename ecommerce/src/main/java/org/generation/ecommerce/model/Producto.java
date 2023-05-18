@@ -12,8 +12,8 @@ import javax.persistence.Table;
 public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name="id", unique = true, nullable = false, columnDefinition = "NUMERIC(19,0)")
-    private long id;
+	@Column (name="id", unique = true, nullable = false)
+    private Long id;
 	@Column(nullable = false)
     private String nombre;
 	@Column(nullable = false)
@@ -25,7 +25,7 @@ public class Producto {
     @Column(nullable = false)
     private int cantidad;
     @Column(nullable = false)
-    private long categoria_id;
+    private Long categoria_id;
 //    private static long total = 0;
 
     public Producto(String nombre, String descripcion, String imagen, double precio, int cantidad, long categoria) {
