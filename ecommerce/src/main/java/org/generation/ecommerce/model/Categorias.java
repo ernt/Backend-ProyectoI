@@ -12,26 +12,26 @@ import javax.persistence.Table;
 public class Categorias {
 	@Id
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
-	@Column (name="id", unique = true, nullable = false)
+	@Column (name="id", unique = true, nullable = false, columnDefinition = "NUMERIC(19,0)")
 	private long id;
 	@Column (nullable=false)
-	private String nombreCategoria;
+	private String nombre;
 
 	//Maquillaje, Calzado, Vestimenta, Accesorios, SexShop, Mascotas, Varios
-	public Categorias(String nombreCategoria) {
+	public Categorias(String nombre) {
 		super();
-		this.nombreCategoria = nombreCategoria;
+		this.nombre = nombre;
 	} //Constructor
 	
 	public Categorias() {
 	}//constructor
 
-	public String getNombreCategoria() {
-		return nombreCategoria;
+	public String getNombre() {
+		return nombre;
 	}//getNombre
 
-	public void setNombreCategoria(String nombreCategoria) {
-		this.nombreCategoria = nombreCategoria;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}//setNombre
 
 	public long getId() {

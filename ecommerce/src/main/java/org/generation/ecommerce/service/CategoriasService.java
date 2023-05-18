@@ -40,18 +40,18 @@ public class CategoriasService {
 	public Categorias addCategoria(Categorias categoria) {
 		// TODO Auto-generated method stub
 		Categorias tmpCat = null;
-		if(categoriasRepository.findBynombreCategoria(categoria.getNombreCategoria()).isEmpty()) {
+		if(categoriasRepository.findBynombreCategoria(categoria.getNombre()).isEmpty()) {
 			tmpCat = categoriasRepository.save(categoria);
 		} //if
 		return tmpCat; 
 	}//addCategoria Repository
 
-	public Categorias updateCategoria(Long id, String nombreCategoria) {
+	public Categorias updateCategoria(Long id, String nombre) {
 		// TODO Auto-generated method stub
 		Categorias tmpCat = null;
 		if(categoriasRepository.existsById(id)) {
 			tmpCat = categoriasRepository.findById(id).get();
-			if (nombreCategoria!=null) tmpCat.setNombreCategoria(nombreCategoria);
+			if (nombre!=null) tmpCat.setNombre(nombre);
 			categoriasRepository.save(tmpCat);
 		}else {
 			System.out.println("Update - La categoria con id " + id + " no existe");

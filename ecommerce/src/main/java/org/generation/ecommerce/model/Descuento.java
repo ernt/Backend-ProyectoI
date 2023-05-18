@@ -1,22 +1,26 @@
 package org.generation.ecommerce.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table (name="descuento")
 public class Descuento {
 	
 	@Id
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
-	@Column (name="id", unique = true, nullable = false)
+	@Column (name="id", unique = true, nullable = false, columnDefinition = "NUMERIC(19,0)")
 	private long id;
 	@Column (nullable=false)
-	private int descuento;
-	@Column (nullable = false)
+	private double descuento;
+	@Column (nullable = false, columnDefinition = "TINYINT(1)")
 	private boolean estado;
 	
-	public Descuento(long id, int descuento, boolean estado) {
+	public Descuento(long id, double descuento, boolean estado) {
 		super();
 		this.id = id;
 		this.descuento = descuento;
@@ -31,10 +35,10 @@ public class Descuento {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public int getDescuento() {
+	public double getDescuento() {
 		return descuento;
 	}
-	public void setDescuento(int descuento) {
+	public void setDescuento(double descuento) {
 		this.descuento = descuento;
 	}
 	public boolean isEstado() {
@@ -48,7 +52,10 @@ public class Descuento {
 	public String toString() {
 		return "Descuento [id=" + id + ", descuento=" + descuento + ", estado=" + estado + "]";
 	}//toString
-	
+
+
+
+
 	
 
 }//class_Descuento
