@@ -12,8 +12,8 @@ import javax.persistence.Table;
 public class Categorias {
 	@Id
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
-	@Column (name="id", unique = true, nullable = false)
-	private Long id;
+	@Column (name="id",unique = true, nullable = false)
+	private long id;
 	@Column (nullable=false)
 	private String nombre;
 

@@ -55,7 +55,7 @@ public class ProductoService {
 			if (imagen != null) tmpProd.setImagen(imagen);
 			if (precio != null) tmpProd.setPrecio(precio.doubleValue());
 			if (cantidad != 0) tmpProd.setCantidad(cantidad);
-			if (categoria_id != null) tmpProd.setCategoria_id(categoria_id);
+			if (categoria_id != null) tmpProd.setCategorias_id(categoria_id);
 			productoRepository.save(tmpProd);
 		}else {
 			System.out.println("Update - El Producto con Id "

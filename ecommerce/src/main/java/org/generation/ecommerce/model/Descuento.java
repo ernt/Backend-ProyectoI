@@ -13,11 +13,11 @@ public class Descuento {
 	
 	@Id
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
-	@Column (name="id", unique = true, nullable = false)
+	@Column (unique = true, nullable = false)
 	private Long id;
 	@Column (nullable=false)
 	private double descuento;
-	@Column (nullable = false, columnDefinition = "TINYINT(1)")
+	@Column (nullable = false)
 	private Boolean estado;
 	
 	public Descuento(long id, double descuento, boolean estado) {

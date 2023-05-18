@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping (path="/api/descuentos/")
+
 public class DescuentoController {
 	
 	private final DescuentoService descuentoService;

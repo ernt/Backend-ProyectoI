@@ -5,11 +5,16 @@ import java.util.List;
 import org.generation.ecommerce.model.Descuento;
 
 import org.generation.ecommerce.repository.DescuentoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class DescuentoService {
 	
 	private final DescuentoRepository descuentoRepository;	
 
+	@Autowired
 	public DescuentoService(DescuentoRepository descuentoRepository) {
 
 		this.descuentoRepository = descuentoRepository;

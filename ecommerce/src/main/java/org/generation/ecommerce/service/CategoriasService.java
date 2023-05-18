@@ -40,7 +40,7 @@ public class CategoriasService {
 	public Categorias addCategoria(Categorias categoria) {
 		// TODO Auto-generated method stub
 		Categorias tmpCat = null;
-		if(categoriasRepository.findBynombreCategoria(categoria.getNombre()).isEmpty()) {
+		if(categoriasRepository.findByNombre(categoria.getNombre()).isEmpty()) {
 			tmpCat = categoriasRepository.save(categoria);
 		} //if
 		return tmpCat; 
