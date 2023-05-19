@@ -1,0 +1,131 @@
+/* Cards */
+main {
+  margin-top: 5rem;
+  margin-bottom: 7rem;
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+}
+
+p {
+  font-size: medium;
+  text-align: justify;
+  font-weight: normal;
+}
+
+.col-4 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  min-width: 300px;
+  max-width: 350px;
+  height: 450px;
+  margin: 10px;
+  box-shadow: 0px 2px 4px rgb(0, 0, 0);
+  background-color: var(--fourth-color);
+}
+.col-4 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 2;
+}
+.col-4 div {
+  position: relative;
+  z-index: 1;
+}
+.col-4:hover img {
+  transition: 0.5s;
+  opacity: 0;
+  z-index: 0;
+}
+
+/* informacion y links cards */
+
+.img-container img {
+  width: 100%;
+  height: auto;
+}
+.nombre,
+.cargo {
+  display: flex;
+  justify-content: center;
+}
+.imgP {
+  text-align: justify;
+  padding: 5px 20px;
+}
+.icono {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.gmail-icon {
+  color: rgb(241, 241, 241);
+}
+
+.parrafoProyecto {
+  text-align: justify;
+  padding: 1rem;
+}
+
+/* Estilo para las tarjetas */
+.card {
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Estilo para las tarjetas en estado hover */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para el texto dentro de las tarjetas */
+.card-text {
+  font-size: 16px;
+  line-height: 22px;
+  color: #0a0a0a;
+  padding: 5px;
+  text-align: justify;
+  margin: px;
+}
+.rowContainer {
+  justify-content: space-evenly;
+}
+h5 {
+  margin-bottom: 0;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+#cuerpo{
+  width: 90% !important;
+  background-color: rgb(233, 232, 232);
+}
+
+.flecha{
+  color: rgb(248, 162, 176);
+}
+
+.fondo{
+  background-color: rgb(228, 206, 219);
+}
+
+.iconos{
+  max-width: 5rem;
+  margin-top: 1rem;
+}
+
+.imagen1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
