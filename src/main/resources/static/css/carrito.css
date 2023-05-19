@@ -1,0 +1,34 @@
+.textoTotal {
+  margin-top: 1rem;
+  font-size: small;
+  color: gray;
+}
+#contenidoTabla {
+  display: none;
+}
+@media print {
+  .navbar * {
+    display: none;
+  }
+  footer * {
+    display: none;
+  }
+  main * {
+    display: none;
+  }
+
+  #contenidoTabla {
+    display: block;
+  }
+}
+
+#cuerpo{
+  width: 90% !important;
+  background-color: rgb(233, 232, 232);
+  padding-bottom: 2rem;
+}
+
+.fondo{
+  background-color: rgb(228, 206, 219);
+}
+
