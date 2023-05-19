@@ -148,7 +148,7 @@ btnConfirm.addEventListener("click", function (event) {
     "nombre"          :     "${nombre.value}", 
     "apellido"        :     "${apellido.value}", 
     "password"        :     "${password.value}",
-    "boleta"    :     "${boleta.value}",
+    "boleta"          :      "${boleta.value}",
     "correo"          :     "${email.value}",
     "telefono"        :     "${txtTelefono.value}",
     "foto"          :     "imagen.jpg"
@@ -161,6 +161,9 @@ btnConfirm.addEventListener("click", function (event) {
     const url = "/api/usuarios/";
     const requestOptions = {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(personas),
     };
 
