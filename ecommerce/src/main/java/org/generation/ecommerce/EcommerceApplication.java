@@ -19,6 +19,8 @@ public class EcommerceApplication {
 //		registrationBean.setFilter(new JwtFilter());
 //		registrationBean.addUrlPatterns("/api/productos/*");
 //		registrationBean.addUrlPatterns("/api/usuarios/*");
+//		registrationBean.addUrlPatterns("/api/descuentos/*");
+//	    registrationBean.addUrlPatterns("/api/categorias/*");
 //		return registrationBean;
 //	}
 }
