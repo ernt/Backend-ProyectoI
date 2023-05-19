@@ -6,7 +6,7 @@ window.addEventListener("load", function () {
       // Maneja la lista de productos
       products = data;
       products
-        .filter((item) => item.categorias_id === 11)
+        .filter((item) => item.categorias_id === 4)
         .forEach((cargado) => {
           let card = `
         <div id="${cargado.id}" class="card m-3 col-sm-4 col-md-4 col-lg-3 col-xl-3 ">
