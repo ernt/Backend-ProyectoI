@@ -2,8 +2,9 @@ let contenedorTarjetas = document.getElementById("contenedorTarjetas");
 
 fetch("http://127.0.0.1:8080/api/productos/")
   .then((response) => response.json())
-  .then((products) => {
+  .then((data) => {
     // Maneja la lista de productos
+    products = data;
     products
       .filter((item) => item.categorias_id === 8)
       .forEach((cargado) => {

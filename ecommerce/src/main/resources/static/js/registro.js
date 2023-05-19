@@ -157,7 +157,26 @@ btnConfirm.addEventListener("click", function (event) {
     registros.push(JSON.parse(personas));
     localStorage.setItem("registros", JSON.stringify(registros));
     limpiarCampos();
-    window.location.href = "../login.html";
+    // window.location.href = "../login.html";
+    const url = "http://127.0.0.1:8080/api/usuarios/";
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(personas),
+    };
+
+    fetch(url, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        // Manejar la respuesta del API
+        console.log(data);
+      })
+      .catch((error) => {
+        // Manejar errores de la solicitud
+        console.error("Error:", error);
+      });
   }
   //   ---------------------------------------------
 });
