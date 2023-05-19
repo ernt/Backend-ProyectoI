@@ -1,14 +1,14 @@
 let contenedorTarjetas = document.getElementById("contenedorTarjetas");
-
-fetch("http://127.0.0.1:8080/api/productos/")
-  .then((response) => response.json())
-  .then((products) => {
-    // Maneja la lista de productos
-    console.log(products);
-    products
-      .filter((item) => item.categorias_id === "11")
-      .forEach((cargado) => {
-        let card = `
+window.addEventListener("load", function () {
+  fetch("http://127.0.0.1:8080/api/productos/")
+    .then((response) => response.json())
+    .then((products) => {
+      // Maneja la lista de productos
+      console.log(products);
+      products
+        .filter((item) => item.categorias_id === "11")
+        .forEach((cargado) => {
+          let card = `
         <div id="${cargado.id}" class="card m-3 col-sm-4 col-md-4 col-lg-3 col-xl-3 ">
         <img src="${cargado.imagen}" alt="img" class="img-fluid fixed-image cardImage">
           <div class="card-body">
@@ -36,30 +36,31 @@ fetch("http://127.0.0.1:8080/api/productos/")
         </div>
       `;
 
-        contenedorTarjetas.insertAdjacentHTML("beforeend", card);
-      });
-    let buttons = document.querySelectorAll(".popover-btn");
-    let popovers = document.querySelectorAll(".popover");
+          contenedorTarjetas.insertAdjacentHTML("beforeend", card);
+        });
+      let buttons = document.querySelectorAll(".popover-btn");
+      let popovers = document.querySelectorAll(".popover");
 
-    buttons.forEach(function (button, index) {
-      let popover = popovers[index];
-      button.addEventListener("click", function () {
-        popover.style.display = "block";
-      });
-    });
-
-    document.addEventListener("click", function (event) {
       buttons.forEach(function (button, index) {
         let popover = popovers[index];
-        if (!button.contains(event.target) && !popover.contains(event.target)) {
-          popover.style.display = "none";
-        }
+        button.addEventListener("click", function () {
+          popover.style.display = "block";
+        });
       });
+
+      document.addEventListener("click", function (event) {
+        buttons.forEach(function (button, index) {
+          let popover = popovers[index];
+          if (!button.contains(event.target) && !popover.contains(event.target)) {
+            popover.style.display = "none";
+          }
+        });
+      });
+      // Realiza acciones adicionales con la lista de productos, como mostrarlos en la interfaz de usuario
+    })
+    .catch((error) => {
+      // Maneja errores de la solicitud
+      console.error("Error:", error);
     });
-    // Realiza acciones adicionales con la lista de productos, como mostrarlos en la interfaz de usuario
-  })
-  .catch((error) => {
-    // Maneja errores de la solicitud
-    console.error("Error:", error);
-  });
+});
 console.log(products);
