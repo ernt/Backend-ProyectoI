@@ -31,7 +31,7 @@ public class UsuarioController {
 	}
 	@GetMapping
 	public List<Usuario> getAllUsers() {
-		return usuarioService.getAllUsers();
+		return usuarioService.getAllUsuarios();
 	}//getAllProducts
 	
 	@GetMapping(path="{userId}")
