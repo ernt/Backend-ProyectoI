@@ -157,7 +157,6 @@ btnConfirm.addEventListener("click", function (event) {
     registros.push(JSON.parse(personas));
     localStorage.setItem("registros", JSON.stringify(registros));
     limpiarCampos();
-    window.location.href = "./login.html";
 
     const url = "/api/usuarios/";
     const requestOptions = {
