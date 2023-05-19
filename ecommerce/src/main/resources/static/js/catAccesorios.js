@@ -4,6 +4,7 @@ fetch("http://127.0.0.1:8080/api/productos/")
   .then((response) => response.json())
   .then((products) => {
     // Maneja la lista de productos
+    console.log(products);
     products
       .filter((item) => item.categorias_id === "11")
       .forEach((cargado) => {
@@ -61,3 +62,4 @@ fetch("http://127.0.0.1:8080/api/productos/")
     // Maneja errores de la solicitud
     console.error("Error:", error);
   });
+console.log(products);
