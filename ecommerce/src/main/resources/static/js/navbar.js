@@ -197,6 +197,7 @@ carritoNumeroMobile.innerText = carritoCantidadProductos.length;
 // Primero, crea un array vacío llamado 'carrito'
 let carritos = JSON.parse(localStorage.getItem("carrito")) || [];
 let contador = carritoCantidadProductos.length;
+
 function agregarProducto(event) {
   // Obtén el ID del producto que se agregó al carrito
   let idProducto = event.target.closest(".card").id;
@@ -218,7 +219,7 @@ function agregarProducto(event) {
     carritos.push(productoCarrito);
   } else {
     // Busca el objeto correspondiente en el array 'articulos'
-    let producto = articulos.find((item) => item.id == idProducto);
+    let producto = products.find((item) => item.id == idProducto);
 
     // Crea un objeto con el nombre y precio del producto
     let productoCarrito = {

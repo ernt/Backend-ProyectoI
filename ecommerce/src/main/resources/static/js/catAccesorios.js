@@ -4,9 +4,8 @@ window.addEventListener("load", function () {
     .then((response) => response.json())
     .then((products) => {
       // Maneja la lista de productos
-      console.log(products);
       products
-        .filter((item) => item.categorias_id === "11")
+        .filter((item) => item.categorias_id === 11)
         .forEach((cargado) => {
           let card = `
         <div id="${cargado.id}" class="card m-3 col-sm-4 col-md-4 col-lg-3 col-xl-3 ">
@@ -63,4 +62,3 @@ window.addEventListener("load", function () {
       console.error("Error:", error);
     });
 });
-console.log(products);

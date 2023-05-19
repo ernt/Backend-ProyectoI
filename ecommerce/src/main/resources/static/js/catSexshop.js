@@ -5,7 +5,7 @@ fetch("http://127.0.0.1:8080/api/productos/")
   .then((products) => {
     // Maneja la lista de productos
     products
-      .filter((item) => item.categorias_id === "13")
+      .filter((item) => item.categorias_id === 13)
       .forEach((cargado) => {
         let card = `
         <div id="${cargado.id}" class="card m-3 col-sm-4 col-md-4 col-lg-3 col-xl-3 ">
