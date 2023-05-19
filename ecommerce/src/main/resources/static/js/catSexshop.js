@@ -1,6 +1,6 @@
 let contenedorTarjetas = document.getElementById("contenedorTarjetas");
 
-fetch("http://127.0.0.1:8080/api/productos/")
+fetch("/api/productos/")
   .then((response) => response.json())
   .then((data) => {
     // Maneja la lista de productos

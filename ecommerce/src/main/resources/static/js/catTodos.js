@@ -2,7 +2,7 @@ let contenedorTarjetas = document.getElementById("contenedorTarjetas");
 
 //CAMBIAR ARREGLO DE OBJETOS POR LO QUE DEVUELVE LA PROMESA
 // Realiza la llamada al API para obtener la lista de objetos modelo
-fetch("http://127.0.0.1:8080/api/productos/")
+fetch("/api/productos/")
   .then((response) => response.json())
   .then((data) => {
     products = data;

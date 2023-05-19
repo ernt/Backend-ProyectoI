@@ -337,7 +337,7 @@ function editarProducto(event) {
     }
   });
 }
-fetch("http://127.0.0.1:8080/api/productos/")
+fetch("/api/productos/")
   .then((response) => response.json())
   .then((products) => {
     // Maneja la lista de productos
