@@ -1,0 +1,1 @@
+web: java -jar -Dserver.port=$PORT build/libs/Backend-ProyectoI-0.0.1-SNAPSHOT-plain.jar
