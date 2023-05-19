@@ -50,10 +50,11 @@ public class ProductoController {
 		@RequestParam(required= false)	String imagen,
 		@RequestParam(required= false)	Double precio,
 		@RequestParam(required= false)	Integer cantidad,
-		@RequestParam(required= false)	Long categoria_id
+		@RequestParam(required= false)	Long categoria_id,
+		@RequestParam(required= false)	Long descuento_id
 			) {
 		
-		return productoService.updateProducto(id, nombre, descripcion, imagen, precio, cantidad, categoria_id );
+		return productoService.updateProducto(id, nombre, descripcion, imagen, precio, cantidad, categoria_id,descuento_id );
 	}
 	
 }//class_ProductoControlle

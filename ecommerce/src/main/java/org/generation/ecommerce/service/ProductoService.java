@@ -39,13 +39,20 @@ public class ProductoService {
 		return tmpProd;
     }//deleteProducto
 
-    public Producto addProducto(Producto producto) {
-    	return productoRepository.save(producto);
-    }//addProducto
+	public Producto addProducto(Producto producto) {
+		Producto tmpPro=null;
+		if (productoRepository.findByNombre(producto.getNombre()).isEmpty()) {
+			tmpPro=productoRepository.save(producto);
+		}else {
+			System.out.println("Ya existe un producto con el nombre "+producto.getNombre());
+		}
+	 
+		return tmpPro;
+	}
 
 
     public Producto updateProducto(Long id, String nombre, String descripcion, String imagen, Double precio,
-                                   Integer cantidad, Long categoria_id) {
+                                   Integer cantidad, Long categoria_id,Long descuento_id) {
         Producto tmpProd = null;
 
 		if (productoRepository.existsById(id)) {
@@ -55,6 +62,7 @@ public class ProductoService {
 			if (imagen != null) tmpProd.setImagen(imagen);
 			if (precio != null) tmpProd.setPrecio(precio.doubleValue());
 			if (cantidad != 0) tmpProd.setCantidad(cantidad);
+			if (descuento_id != null) tmpProd.setDescuento_id(descuento_id);
 			if (categoria_id != null) tmpProd.setCategorias_id(categoria_id);
 			productoRepository.save(tmpProd);
 		}else {

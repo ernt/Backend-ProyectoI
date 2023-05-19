@@ -13,8 +13,8 @@ public class Descuento {
 	
 	@Id
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
-	@Column (unique = true, nullable = false)
-	private Long id;
+	@Column (name="id",unique = true, nullable = false)
+	private long id;
 	@Column (nullable=false)
 	private double descuento;
 	@Column (nullable = false)

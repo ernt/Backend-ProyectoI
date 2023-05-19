@@ -2,6 +2,7 @@ package org.generation.ecommerce.service;
 
 import java.util.List;
 
+import org.generation.ecommerce.model.Categorias;
 import org.generation.ecommerce.model.Descuento;
 
 import org.generation.ecommerce.repository.DescuentoRepository;
@@ -21,14 +22,12 @@ public class DescuentoService {
 	}
 
 	public List<Descuento> getAllDescuentos() {
-		// TODO Auto-generated method stub
 		return descuentoRepository.findAll();
 	}	
 
 	public Descuento getDescuento(Long id) {
-		// TODO Auto-generated method stub
 		return descuentoRepository.findById(id).orElseThrow(
-				()->new IllegalArgumentException("El Producto con id "+
+				()->new IllegalArgumentException("El Descuento con id "+
 						id + " no existe")
 				);//()->Funcion_flecha_que_lanza_la_excepcion
 	}
@@ -44,12 +43,15 @@ public class DescuentoService {
 	}
 	
 	public Descuento addDescuento(Descuento descuento) {
-		// TODO Auto-generated method stub
-		return descuentoRepository.save(descuento);
+		Descuento tmp = null;
+		if(descuentoRepository.findByDescuento(descuento.getDescuento()).isEmpty()) {
+			tmp=descuentoRepository.save(descuento);
+		} //if
+		return tmp;
 	}
 	
 	public Descuento updateDescuento(Long id, Double descuento, Boolean estado) {
-		// TODO Auto-generated method stub
+		
 		Descuento tmpDesc = null;
 		
 		if (descuentoRepository.existsById(id)) {
