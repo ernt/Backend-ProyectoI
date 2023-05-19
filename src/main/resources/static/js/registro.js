@@ -148,10 +148,10 @@ btnConfirm.addEventListener("click", function (event) {
     "nombre"          :     "${nombre.value}", 
     "apellido"        :     "${apellido.value}", 
     "password"        :     "${password.value}",
-    "numeroBoleta"    :     "${boleta.value}",
+    "boleta"    :     "${boleta.value}",
     "correo"          :     "${email.value}",
     "telefono"        :     "${txtTelefono.value}",
-    "imagen"          :     "imagen.jpg"
+    "foto"          :     "imagen.jpg"
   }`;
 
     registros.push(JSON.parse(personas));
