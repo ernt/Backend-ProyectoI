@@ -337,44 +337,7 @@ function editarProducto(event) {
     }
   });
 }
-fetch("/api/productos/")
-  .then((response) => response.json())
-  .then((products) => {
-    // Maneja la lista de productos
 
-    products.forEach((cargado) => {
-      let cardGuardadas = `
-        <div id="${cargado.id}" class="card m-3 col-sm-4 col-md-4 col-lg-3 col-xl-3 ">
-        <img src="${cargado.imagen}" alt="img" class="img-fluid fixed-image cardImage">
-          <div class="card-body">
-            <h5 class="card-title">${cargado.nombre}</h5>
-            <p class="card-price">Precio: ${cargado.precio}</p>
-            <p class="card-text">${cargado.descripcion}</p>
-            <a class="popover-btn">Leer más </a>
-            <section class="popover">
-            <h3>
-            ${cargado.nombre}
-            </h3>
-            <span>
-            Precio: <strong>${cargado.precio}</strong>
-            </span>
-            <p>
-            ${cargado.descripcion}
-            </p>
-            
-            <button onclick="eliminarPoper(event)" class="" id="btnPoper"><i class="bi bi-x-circle fs-5"></i></button>
-            </section>
-            <button type="button" onclick="eliminarCard(event)" class="btn btn-danger btn-sm "  id="btnEliminar">Eliminar</button>
-            <button id="btnEditar" onclick="editarProducto(event)" type="button" class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
-    
-      `;
-      contenedorTarjetas.insertAdjacentHTML("beforeend", cardGuardadas);
-    });
-  })
-  .catch((error) => {
-    // Maneja errores de la solicitud
-    console.error("Error:", error);
-  });
 let buttons = document.querySelectorAll(".popover-btn");
 let popovers = document.querySelectorAll(".popover");
 
