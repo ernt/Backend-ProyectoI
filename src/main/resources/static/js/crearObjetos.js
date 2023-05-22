@@ -14,41 +14,9 @@ let alertValidaciones = document.getElementById("alertValidaciones");
 
 let contenedorTarjetas = document.getElementById("contenedorTarjetas");
 
-let datos = JSON.parse(localStorage.getItem("datos")) || []; // aqui se guarda la tabla
-
 let isValid = true;
 let idTimeout;
 let precio = 0;
-
-// // MOVER AL BOTON AGREGAR
-// Crea un objeto con los datos del modelo a enviar
-// const nuevoProducto = {
-//   nombre: nombre.value,
-//   precio: precios.value,
-//   descripcion: descripcion.value,
-//   categorias_id: categoria.value,
-//   imagen: imagen,
-// };
-
-// // Realiza la llamada al API para crear el nuevo modelo
-// fetch("https://fakestoreapi.com/products", {
-//   method: "POST",
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-//   body: JSON.stringify(nuevoProducto),
-// })
-//   .then((response) => response.json())
-//   .then((data) => {
-//     // Maneja la respuesta del API
-//     console.log(data);
-//     // Realiza las acciones apropiadas según la respuesta del API
-//   })
-//   .catch((error) => {
-//     // Maneja errores de la solicitud
-//     console.error("Error:", error);
-//   });
-//-----------------------------------------------------------
 
 //quita el bugsito de que si das enter se eliminen objetos
 document.addEventListener("keydown", function (e) {
@@ -157,44 +125,53 @@ btnAgregar.addEventListener("click", function (event) {
   }, 3000);
 
   if (isValid) {
-    const timestamp = new Date().getTime();
-    let card = `
-    <div id="${timestamp}" class="card m-3 col-sm-4 col-md-4 col-lg-3 col-xl-3 ">
-    <img src="${imagen}" alt="img" class="img-fluid fixed-image cardImage">
-      <div class="card-body">
-        <h5 class="card-title">${nombre.value}</h5>
-        <p class="card-price">Precio: ${precios.value}</p>
-        <div class="content">
-        <p class="card-text">${descripcion.value}</p>
-        <a class="popover-btn">Leer más </a>
-        <section class="popover">
-        <h3>
-        ${nombre.value}
-        </h3>
-        <span>
-        Precio: <strong>${precios.value}</strong>
-        </span>
-        <p>
-        ${descripcion.value}
-        </p>
-        <button onclick="eliminarPoper(event)" class="" id="btnPoper"><i class="bi bi-x-circle fs-5"></i></button>
-        </section>
-        <button type="button" onclick="eliminarCard(event)" class="btn btn-danger btn-sm "  id="btnEliminar">Eliminar</button>
-        <button id="btnEditar"onclick="editarProducto(event)" type="button" class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
-      </div>
-    </div>
-
-    `;
-
     let elemento = `{ 
-    "id"          :     "${timestamp}", 
+    "id"          :     "", 
     "imagen"      :     "${imagen}", 
     "nombre"      :     "${nombre.value}",
     "precio"      :     "${precios.value}",
     "descripcion" :     "${descripcion.value}",
     "categoria"   :     "${categoria.value}"
   }`;
-
+    console.log(elemento);
+    fetch("/api/productos/")
+      .then((res) => res.json())
+      .then((products) => {
+        // Maneja la lista de productos
+        console.log(products);
+        products.forEach((cargado) => {
+          let cardGuardadas = `
+        <div id="${cargado.id}" class="card m-3 col-sm-4 col-md-4 col-lg-3 col-xl-3 ">
+        <img src="${cargado.imagen}" alt="img" class="img-fluid fixed-image cardImage">
+          <div class="card-body">
+            <h5 class="card-title">${cargado.nombre}</h5>
+            <p class="card-price">Precio: ${cargado.precio}</p>
+            <p class="card-text">${cargado.descripcion}</p>
+            <a class="popover-btn">Leer más </a>
+            <section class="popover">
+            <h3>
+            ${cargado.nombre}
+            </h3>
+            <span>
+            Precio: <strong>${cargado.precio}</strong>
+            </span>
+            <p>
+            ${cargado.descripcion}
+            </p>
+            
+            <button onclick="eliminarPoper(event)" class="" id="btnPoper"><i class="bi bi-x-circle fs-5"></i></button>
+            </section>
+            <button type="button" onclick="eliminarCard(event)" class="btn btn-danger btn-sm "  id="btnEliminar">Eliminar</button>
+            <button id="btnEditar" onclick="editarProducto(event)" type="button" class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
+    
+      `;
+          contenedorTarjetas.insertAdjacentHTML("beforeend", cardGuardadas);
+        });
+      })
+      .catch((error) => {
+        // Maneja errores de la solicitud
+        console.error("Error:", error);
+      });
     datos.push(JSON.parse(elemento));
     localStorage.setItem("datos", JSON.stringify(datos));
 
