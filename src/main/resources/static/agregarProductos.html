@@ -46,7 +46,7 @@
           >
             <p id="alertValidacionesTexto"></p>
           </div>
-          <form class="needs-validation">
+          <form class="">
             <div class="row">
               <div class="col-sm-6 col-lg-4 mb-3">
                 <label for="Name">Nombre</label>
@@ -57,7 +57,6 @@
                   autofocus
                   placeholder="Maquillaje"
                   value=""
-                  required
                 />
                 <div class="invalid-feedback">Nombre inválido</div>
               </div>
@@ -69,7 +68,6 @@
                   id="precios"
                   placeholder="280.00"
                   value=""
-                  required
                 />
                 <div class="invalid-feedback">Cantidad inválida</div>
               </div>
@@ -82,21 +80,20 @@
                   autofocus
                   placeholder="El producto tiene estas características..."
                   value=""
-                  required
                 />
                 <div class="invalid-feedback">Nombre inválido</div>
               </div>
               <div class="col-sm-6 col-lg-4 mb-3">
                 <label for="categoria">Categoría</label>
-                <select class="form-control" id="categoria" required>
+                <select class="form-control" id="categoria">
                   <option value="">Seleccione una categoría</option>
-                  <option value="8">Maquillaje</option>
-                  <option value="9">Calzado</option>
-                  <option value="10">Vestimenta</option>
-                  <option value="11">Accesorios</option>
-                  <option value="12">Mascotas</option>
-                  <option value="13">Sexshop</option>
-                  <option value="14">Varios</option>
+                  <option value="1">Maquillaje</option>
+                  <option value="2">Calzado</option>
+                  <option value="3">Vestimenta</option>
+                  <option value="4">Accesorios</option>
+                  <option value="5">Mascotas</option>
+                  <option value="6">Sexshop</option>
+                  <option value="7">Varios</option>
                 </select>
               </div>
               <div class="col-sm-6 col-lg-2 mb-2">
@@ -126,7 +123,7 @@
                 />
               </div>
             </div>
-            <button id="btnAgregar" class="btn btn-primary btn-lg btn-block" type="button">
+            <button id="btnAgregar" class="btn btn-primary btn-lg btn-block" type="submit">
               Agregar
             </button>
             <hr class="mb-4" />
@@ -199,7 +196,6 @@
                     autofocus
                     placeholder="Maquillaje"
                     value=""
-                    required
                   />
                   <div class="invalid-feedback">Nombre inválido</div>
                 </div>
@@ -211,7 +207,6 @@
                     id="preciosModal"
                     placeholder="280.00"
                     value=""
-                    required
                   />
                   <div class="invalid-feedback">Cantidad inválida</div>
                 </div>
@@ -224,7 +219,6 @@
                     autofocus
                     placeholder="El producto tiene estas características..."
                     value=""
-                    required
                   />
                   <div class="invalid-feedback">Nombre inválido</div>
                 </div>
