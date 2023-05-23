@@ -148,35 +148,35 @@ btnConfirm.addEventListener("click", function (event) {
     "nombre"          :     "${nombre.value}", 
     "apellido"        :     "${apellido.value}", 
     "password"        :     "${password.value}",
-    "numeroBoleta"    :     "${boleta.value}",
+    "boleta"          :      "${boleta.value}",
     "correo"          :     "${email.value}",
     "telefono"        :     "${txtTelefono.value}",
-    "imagen"          :     "${imagen}"
+    "foto"          :     "imagen.jpg"
   }`;
 
     registros.push(JSON.parse(personas));
     localStorage.setItem("registros", JSON.stringify(registros));
     limpiarCampos();
-    window.location.href = "./login.html";
-    // const url = "http://127.0.0.1:8080/api/usuarios/";
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(personas),
-    // };
 
-    // fetch(url, requestOptions)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     // Manejar la respuesta del API
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     // Manejar errores de la solicitud
-    //     console.error("Error:", error);
-    //   });
+    const url = "/api/usuarios/";
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(personas),
+    };
+
+    fetch(url, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        // Manejar la respuesta del API
+        console.log(data);
+      })
+      .catch((error) => {
+        // Manejar errores de la solicitud
+        console.error("Error:", error);
+      });
   }
   //   ---------------------------------------------
 });
