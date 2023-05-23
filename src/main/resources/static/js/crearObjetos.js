@@ -377,6 +377,7 @@ document.addEventListener("DOMContentLoaded", getAll);
 //POST
 btnAgregar.addEventListener("click", async (e) => {
   e.preventDefault();
+
   try {
     let options = {
       method: "POST",
