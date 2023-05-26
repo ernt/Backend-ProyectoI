@@ -44,7 +44,7 @@ email.addEventListener("input", () => {
   }
 });
 
-btnConfirm.addEventListener("click", function (event) {
+btnConfirm.addEventListener("click", async (event) => {
   event.preventDefault();
   let checkboxes = formSend.querySelector('input[type="radio"]:checked');
   clearTimeout(idTimeout);
@@ -144,39 +144,49 @@ btnConfirm.addEventListener("click", function (event) {
   //   Codigo que se ejecuta al cumplir validaciones
   if (isValid) {
     let personas = `{
-    "rol"          :        "${checkboxes.value}", 
     "nombre"          :     "${nombre.value}", 
     "apellido"        :     "${apellido.value}", 
     "password"        :     "${password.value}",
-    "boleta"          :      "${boleta.value}",
+    "boleta"    :     "${boleta.value}",
     "correo"          :     "${email.value}",
     "telefono"        :     "${txtTelefono.value}",
+    "rol"          :        "${checkboxes.value}", 
     "foto"          :     "imagen.jpg"
   }`;
 
-    registros.push(JSON.parse(personas));
+    registros.push(personas);
     localStorage.setItem("registros", JSON.stringify(registros));
-    limpiarCampos();
 
-    const url = "/api/usuarios/";
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(personas),
-    };
-
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        // Manejar la respuesta del API
-        console.log(data);
-      })
-      .catch((error) => {
-        // Manejar errores de la solicitud
-        console.error("Error:", error);
+    // window.location.href = "./login.html";
+    try {
+      let usuarioRegistrado = JSON.stringify({
+        nombre: nombre.value,
+        apellido: apellido.value,
+        password: password.value,
+        boleta: boleta.value,
+        correo: email.value,
+        telefono: txtTelefono.value,
+        rol: checkboxes.value,
+        foto: "imagen.jpg",
       });
+
+      let RequestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: usuarioRegistrado,
+      };
+      let res = await fetch("http://127.0.0.1:8080/api/usuarios/", RequestOptions);
+      let json = await res.json();
+
+      if (res.ok) location.reload();
+      if (!res.ok) throw { status: res.status, statusText: res.statusText };
+      limpiarCampos();
+    } catch (err) {
+      let message = err.statusText || "Ocurrio un error al agregar";
+      formSend.insertAdjacentHTML("afterbegin", `<p>Error ${err.status}:${message}</p>`);
+    }
   }
   //   ---------------------------------------------
 });
