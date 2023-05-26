@@ -1,9 +1,12 @@
-let form = document.querySelector("form");
-let nombre = document.getElementById("Name");
-let precios = document.getElementById("precios");
-let descripcion = document.getElementById("descripcion");
-let categoria = document.getElementById("categoria");
-let imagen;
+const nombre = document.getElementById("Name");
+const precios = document.getElementById("precios");
+const descripcion = document.getElementById("descripcion");
+const categoria = document.getElementById("categoria");
+const imagen = document.getElementById("imagen");
+const descuento_id = document.getElementById("descuento_id");
+const cantidad = document.getElementById("cantidad");
+
+let btnEditar = document.getElementById("btnEditar");
 
 let btnAgregar = document.getElementById("btnAgregar");
 let btnEliminar = document.getElementById("btnEliminar");
@@ -28,49 +31,6 @@ document.addEventListener("keydown", function (e) {
     return false;
   }
 });
-
-//imagen en codigo
-document.querySelector("#imagen").addEventListener("change", function () {
-  const reader = new FileReader();
-
-  reader.addEventListener("load", () => {
-    imagen = reader.result;
-  });
-  reader.readAsDataURL(this.files[0]);
-}); //imagen codigo modal
-
-// Delete button
-
-//Previsualiza la imagen del input
-function previewImagen(event) {
-  let reader = new FileReader();
-  reader.onload = function () {
-    let vista_previa = document.getElementById("vista-previa");
-    vista_previa.src = reader.result;
-  };
-  reader.readAsDataURL(event.target.files[0]);
-} // prevImagen
-
-function previewImagenModal(event) {
-  let reader = new FileReader();
-  reader.onload = function () {
-    let vista_previa = document.getElementById("vista-previaModal");
-    vista_previa.src = reader.result;
-  };
-  reader.readAsDataURL(event.target.files[0]);
-}
-function validarPrecio() {
-  if (precios.value.length == 0) {
-    return false;
-  }
-  if (isNaN(precios.value)) {
-    return false;
-  }
-  if (parseFloat(precios.value) <= 0) {
-    return false;
-  }
-  return true;
-}
 
 //VALIDA CAMPOS CON BORDE ROJO  O VERDE
 // btnAgregar.addEventListener("click", function (event) {
@@ -202,12 +162,12 @@ function validarPrecio() {
 // });
 
 // CUANDO TE SALES DEL CAMPO "BLUR" en este caso quita espacios
-precios.addEventListener("blur", function (event) {
-  event.preventDefault();
-  precios.value = precios.value.trim();
-  nombre.value = nombre.value.trim();
-  descripcion.value = descripcion.value.trim();
-});
+// precios.addEventListener("blur", function (event) {
+//   event.preventDefault();
+//   precios.value = precios.value.trim();
+//   nombre.value = nombre.value.trim();
+//   descripcion.value = descripcion.value.trim();
+// });
 
 // function eliminarCard(event) {
 //   let tarjeta = event.target.closest(".card");
@@ -246,93 +206,73 @@ precios.addEventListener("blur", function (event) {
 //   });
 // }
 
-function editarProducto(event) {
-  //obtener el elemento padre mas cercano
-  let tarjeta = event.target.closest(".card");
-  // Obtener el ID de la tarjeta que se va a eliminar
-  let idTarjeta = tarjeta.getAttribute("id");
-  //muestra el modal
-  let confirmationModal = new bootstrap.Modal(document.getElementById("exampleModal"));
-  confirmationModal.show();
-  let btnAgregarModal = document.getElementById("btnAgregarModal");
-  let nombreModal = document.getElementById("NameModal");
-  let preciosModal = document.getElementById("preciosModal");
-  let descripcionModal = document.getElementById("descripcionModal");
+// function editarProducto(event) {
+//   //obtener el elemento padre mas cercano
+//   let tarjeta = event.target.closest(".card");
+//   // Obtener el ID de la tarjeta que se va a eliminar
+//   let idTarjeta = tarjeta.getAttribute("id");
+//   //muestra el modal
+//   let confirmationModal = new bootstrap.Modal(document.getElementById("exampleModal"));
+//   confirmationModal.show();
+//   let btnAgregarModal = document.getElementById("btnAgregarModal");
+//   let nombreModal = document.getElementById("NameModal");
+//   let preciosModal = document.getElementById("preciosModal");
+//   let descripcionModal = document.getElementById("descripcionModal");
 
-  btnAgregarModal.addEventListener("click", function () {
-    let nombreTarjeta = tarjeta.querySelector("h5");
-    let precioTarjeta = tarjeta.querySelector(".card-price");
-    let descripcionmTarjeta = tarjeta.querySelector(".card-text");
+//   btnAgregarModal.addEventListener("click", function () {
+//     let nombreTarjeta = tarjeta.querySelector("h5");
+//     let precioTarjeta = tarjeta.querySelector(".card-price");
+//     let descripcionmTarjeta = tarjeta.querySelector(".card-text");
 
-    let validacionModal = true;
+//     let validacionModal = true;
 
-    nombreModal.value.length < 2
-      ? ((nombreModal.style.border = "solid thin red"),
-        (alertValidaciones.style.display = "block"),
-        (validacionModal = false))
-      : (nombreModal.style.border = "");
+//     nombreModal.value.length < 2
+//       ? ((nombreModal.style.border = "solid thin red"),
+//         (alertValidaciones.style.display = "block"),
+//         (validacionModal = false))
+//       : (nombreModal.style.border = "");
 
-    descripcionModal.value.length < 10
-      ? ((descripcionModal.style.border = "solid thin red"),
-        (alertValidaciones.style.display = "block"),
-        (validacionModal = false))
-      : (descripcionModal.style.border = "");
+//     descripcionModal.value.length < 10
+//       ? ((descripcionModal.style.border = "solid thin red"),
+//         (alertValidaciones.style.display = "block"),
+//         (validacionModal = false))
+//       : (descripcionModal.style.border = "");
 
-    preciosModal.value == "" ||
-    isNaN(preciosModal.value) ||
-    parseFloat(preciosModal.value) <= 0
-      ? ((preciosModal.style.border = "solid thin red"),
-        (alertValidaciones.style.display = "block"),
-        (validacionModal = false))
-      : (preciosModal.style.border = "");
+//     preciosModal.value == "" ||
+//     isNaN(preciosModal.value) ||
+//     parseFloat(preciosModal.value) <= 0
+//       ? ((preciosModal.style.border = "solid thin red"),
+//         (alertValidaciones.style.display = "block"),
+//         (validacionModal = false))
+//       : (preciosModal.style.border = "");
 
-    if (validacionModal) {
-      btnAgregarModal.setAttribute("data-bs-dismiss", "modal");
-      btnAgregarModal.classList.remove("btn-primary");
-      btnAgregarModal.classList.add("btn-danger");
-      btnAgregarModal.innerText = "Cerrar";
-    }
+//     if (validacionModal) {
+//       btnAgregarModal.setAttribute("data-bs-dismiss", "modal");
+//       btnAgregarModal.classList.remove("btn-primary");
+//       btnAgregarModal.classList.add("btn-danger");
+//       btnAgregarModal.innerText = "Cerrar";
+//     }
 
-    if (validacionModal) {
-      //cambiar datos de la card
-      (nombreTarjeta.innerText = nombreModal.value),
-        (precioTarjeta.innerText = preciosModal.value),
-        (descripcionmTarjeta.innerText = descripcionModal.value);
-      // guardar los cambios en el localStorage
-      let productos = JSON.parse(localStorage.getItem("datos"));
-      let producto = productos.find((p) => p.id === idTarjeta);
-      producto.nombre = nombreModal.value;
-      producto.precio = preciosModal.value;
-      producto.descripcion = descripcionModal.value;
-      localStorage.setItem("datos", JSON.stringify(productos));
-    }
-  });
-}
-
-// let buttons = document.querySelectorAll(".popover-btn");
-// let popovers = document.querySelectorAll(".popover");
-
-// buttons.forEach(function (button, index) {
-//   let popover = popovers[index];
-//   button.addEventListener("click", function () {
-//     popover.style.display = "block";
-//   });
-// });
-
-// document.addEventListener("click", function (event) {
-//   buttons.forEach(function (button, index) {
-//     let popover = popovers[index];
-//     if (!button.contains(event.target) && !popover.contains(event.target)) {
-//       popover.style.display = "none";
+//     if (validacionModal) {
+//       //cambiar datos de la card
+//       (nombreTarjeta.innerText = nombreModal.value),
+//         (precioTarjeta.innerText = preciosModal.value),
+//         (descripcionmTarjeta.innerText = descripcionModal.value);
+//       // guardar los cambios en el localStorage
+//       let productos = JSON.parse(localStorage.getItem("datos"));
+//       let producto = productos.find((p) => p.id === idTarjeta);
+//       producto.nombre = nombreModal.value;
+//       producto.precio = preciosModal.value;
+//       producto.descripcion = descripcionModal.value;
+//       localStorage.setItem("datos", JSON.stringify(productos));
 //     }
 //   });
-// });
-
-//GET
+// }
+//GET-----------------------------------------------------------------
 const getAll = async () => {
   try {
-    let res = await fetch("/api/productos/"),
-      json = await res.json();
+    let res = await fetch("/api/productos/");
+    let json = await res.json();
 
     if (!res.ok) throw { status: res.status, statusText: res.statusText };
 
@@ -359,7 +299,7 @@ const getAll = async () => {
             <button onclick="eliminarPoper(event)" class="" id="btnPoper"><i class="bi bi-x-circle fs-5"></i></button>
             </section>
             <button type="button" onclick="eliminarCard(event)" class="btn btn-danger btn-sm "  id="btnEliminar">Eliminar</button>
-            <button id="btnEditar" onclick="editarProducto(event)" type="button" class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
+            <button id="btnEditar" data-bs-toggle="modal" data-bs-target="#exampleModal"  onclick="agregarDatosForm(event)" type="button" class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
     
       `;
       contenedorTarjetas.insertAdjacentHTML("beforeend", cardGuardadas);
@@ -374,28 +314,29 @@ const getAll = async () => {
 };
 document.addEventListener("DOMContentLoaded", getAll);
 
-//POST
+//POST---------------------------------------------------------------------
 btnAgregar.addEventListener("click", async (e) => {
   e.preventDefault();
   try {
-    let options = {
+    let RequestOptions = {
       method: "POST",
       headers: {
-        "Content=type": "application/json; charset=utf-8",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         nombre: nombre.value,
         descripcion: descripcion.value,
-        imagen: "img.jpg",
+        imagen: `${imagen.value}`,
         precio: precios.value,
-        cantidad: 0,
-        descuento_id: 0,
+        cantidad: cantidad.value,
+        descuento_id: descuento_id.value,
         categoria: categoria.value,
       }),
     };
-    let res = await fetch("/api/productos/", options),
-      json = await res.json();
+    let res = await fetch("/api/productos/", RequestOptions);
+    let json = await res.json();
 
+    if (res.ok) location.reload();
     if (!res.ok) throw { status: res.status, statusText: res.statusText };
   } catch (err) {
     let message = err.statusText || "Ocurrio un error al agregar";
@@ -405,3 +346,105 @@ btnAgregar.addEventListener("click", async (e) => {
     );
   }
 });
+let buttons = document.querySelectorAll(".popover-btn");
+let popovers = document.querySelectorAll(".popover");
+
+buttons.forEach(function (button, index) {
+  let popover = popovers[index];
+  button.addEventListener("click", function () {
+    popover.style.display = "block";
+  });
+});
+
+document.addEventListener("click", function (event) {
+  buttons.forEach(function (button, index) {
+    let popover = popovers[index];
+    if (!button.contains(event.target) && !popover.contains(event.target)) {
+      popover.style.display = "none";
+    }
+  });
+});
+
+//DELETE -------------------------------------------------------------
+function eliminarCard(event) {
+  event.preventDefault();
+  let tarjetaPadre = event.target.closest(".card");
+  let idProductoBorrado = tarjetaPadre.id;
+
+  try {
+    let RequestOptions = {
+      method: "DELETE",
+    };
+    let res = fetch(`/api/productos/${idProductoBorrado}`, RequestOptions);
+
+    location.reload();
+  } catch (err) {
+    let message = err.statusText || "Ocurrio un error al borrar";
+    contenedorTarjetas.insertAdjacentHTML(
+      "beforeend",
+      `<p>Error ${err.status}:${message}</p>`
+    );
+  }
+}
+
+const nombreModal = document.getElementById("nombreModal");
+const preciosModal = document.getElementById("precioModal");
+const descripcionModal = document.getElementById("descripcionModal");
+const categoriaModal = document.getElementById("categoriaModal");
+const imagenModal = document.getElementById("imagenModal");
+const descuento_idModal = document.getElementById("descuento_idModal");
+const cantidadModal = document.getElementById("cantidadModal");
+let idProductoEditado;
+//Relleno del modal con el producto seleccionado
+async function agregarDatosForm(event) {
+  idProductoEditado = event.target.closest(".card").id;
+  try {
+    let res = await fetch(`/api/productos/${idProductoEditado}`);
+    let json = await res.json();
+
+    if (!res.ok) throw { status: res.status, statusText: res.statusText };
+    nombreModal.value = json.nombre;
+    preciosModal.value = json.precio;
+    descripcionModal.value = json.descripcion;
+    categoriaModal.value = json.categorias_id;
+    imagenModal.value = json.imagen;
+    descuento_idModal.value = json.descuento_id;
+    cantidadModal.value = json.cantidad;
+  } catch (error) {
+    let message = err.statusText || "Ocurrio un error al cargar";
+    contenedorTarjetas.insertAdjacentHTML(
+      "beforeend",
+      `<p>Error ${err.status}:${message}</p>`
+    );
+  }
+}
+
+//PUT
+async function editarProducto(event) {
+  event.preventDefault();
+  try {
+    let RequestOptions = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nombre: nombreModal.value,
+        descripcion: categoriaModal.value,
+        imagen: imagenModal.value,
+        precio: preciosModal.value,
+        cantidad: cantidadModal.value,
+        descuento_id: descuento_idModal.value,
+        categorias_id: categoriaModal.value,
+      }),
+    };
+    console.log(RequestOptions.body);
+    console.log(idProductoEditado);
+    let res = await fetch(`/api/productos/${idProductoEditado}`, RequestOptions);
+    let json = await res.json();
+    if (!res.ok) throw { status: res.status, statusText: res.statusText };
+  } catch (error) {
+    let message = "Ocurrio un error al editar";
+    contenedorTarjetas.insertAdjacentHTML("afterbegin", `<p>Error:${message}</p>`);
+  }
+}

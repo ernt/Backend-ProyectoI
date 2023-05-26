@@ -46,7 +46,7 @@
           >
             <p id="alertValidacionesTexto"></p>
           </div>
-          <form class="">
+          <form class="needs-validation">
             <div class="row">
               <div class="col-sm-6 col-lg-4 mb-3">
                 <label for="Name">Nombre</label>
@@ -58,7 +58,6 @@
                   placeholder="Maquillaje"
                   value=""
                 />
-                <div class="invalid-feedback">Nombre inválido</div>
               </div>
               <div class="col-sm-6 col-lg-4 mb-3">
                 <label for="precios">Precio</label>
@@ -81,49 +80,54 @@
                   placeholder="El producto tiene estas características..."
                   value=""
                 />
-                <div class="invalid-feedback">Nombre inválido</div>
               </div>
               <div class="col-sm-6 col-lg-4 mb-3">
                 <label for="categoria">Categoría</label>
                 <select class="form-control" id="categoria">
                   <option value="">Seleccione una categoría</option>
-                  <option value="1">Maquillaje</option>
-                  <option value="2">Calzado</option>
-                  <option value="3">Vestimenta</option>
-                  <option value="4">Accesorios</option>
-                  <option value="5">Mascotas</option>
-                  <option value="6">Sexshop</option>
-                  <option value="7">Varios</option>
+                  <option value="8">Maquillaje</option>
+                  <option value="9">Calzado</option>
+                  <option value="10">Vestimenta</option>
+                  <option value="11">Accesorios</option>
+                  <option value="12">Mascotas</option>
+                  <option value="13">Sexshop</option>
+                  <option value="14">Varios</option>
                 </select>
               </div>
-              <div class="col-sm-6 col-lg-2 mb-2">
-                <label for="imagen">Seleccione imagen </label><br />
+              <div class="col-sm-6 col-lg-4 mb-3">
+                <label for="descripcion">Link de la imagen</label>
                 <input
-                  type="file"
+                  type="text"
+                  class="form-control"
                   id="imagen"
-                  name="imagen"
-                  class="d-none"
-                  onchange="previewImagen(event)"
+                  autofocus
+                  placeholder="https://img.ltwebstatic.com/images3_pi...."
+                  value=""
                 />
-                <button
-                  type="button"
-                  class="btnImagen"
-                  onclick="document.getElementById('imagen').click()"
-                >
-                  <i class="bi bi-file-earmark-plus"></i>
-                </button>
-                <div class="invalid-feedback">Nombre inválido</div>
               </div>
-              <div class="col-sm-6 col-lg-3 mb-3">
-                <img
-                  id="vista-previa"
-                  src="#"
-                  alt=""
-                  style="max-width: 100%; max-height: 80px"
+              <div class="col-sm-6 col-lg-4 mb-3">
+                <label for="descuento_id">Ingresa un % de descuento</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="descuento_id"
+                  name="descuento_id"
+                  placeholder="10"
+                />
+              </div>
+              <div class="col-sm-6 col-lg-4 mb-3">
+                <label for="cantidad">Cantidad de productos</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="cantidad"
+                  name="cantidad"
+                  placeholder="6"
                 />
               </div>
             </div>
-            <button id="btnAgregar" class="btn btn-primary btn-lg btn-block" type="submit">
+
+            <button id="btnAgregar" class="btn btn-primary btn-lg btn-block" type="button">
               Agregar
             </button>
             <hr class="mb-4" />
@@ -137,34 +141,6 @@
         </div>
       </div>
     </main>
-    <div class="modal" id="confirmation-modal" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modal-title">Modal title</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body" id="modal-body">Modal body text goes here.</div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-              id="confirm-no"
-            >
-              No
-            </button>
-            <button type="button" class="btn btn-danger" id="confirm-yes">Sí</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Modal -->
     <div
       class="modal fade"
@@ -173,10 +149,10 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar producto</h1>
             <button
               type="button"
               class="btn-close"
@@ -187,31 +163,30 @@
           <div class="modal-body">
             <form class="needs-validation">
               <div class="row">
-                <div class="col-sm-6 col-lg-4 mb-3">
-                  <label for="Name">Nombre</label>
+                <div class="col-sm-6 mb-3">
+                  <label for="nombreModal">Nombre</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="NameModal"
+                    id="nombreModal"
                     autofocus
                     placeholder="Maquillaje"
                     value=""
                   />
-                  <div class="invalid-feedback">Nombre inválido</div>
                 </div>
-                <div class="col-sm-6 col-lg-4 mb-3">
-                  <label for="precios">Precio</label>
+                <div class="col-sm-6 mb-3">
+                  <label for="precioModal">Precio</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="preciosModal"
+                    id="precioModal"
                     placeholder="280.00"
                     value=""
                   />
                   <div class="invalid-feedback">Cantidad inválida</div>
                 </div>
-                <div class="col-sm-6 col-lg-4 mb-3">
-                  <label for="descripcion">Descripción</label>
+                <div class="col-sm-6 mb-3">
+                  <label for="descripcionModal">Descripción</label>
                   <input
                     type="text"
                     class="form-control"
@@ -220,17 +195,60 @@
                     placeholder="El producto tiene estas características..."
                     value=""
                   />
-                  <div class="invalid-feedback">Nombre inválido</div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <label for="categoriaModal">Categoría</label>
+                  <select class="form-control" id="categoriaModal">
+                    <option value="">Seleccione una categoría</option>
+                    <option value="1">Maquillaje</option>
+                    <option value="2">Calzado</option>
+                    <option value="3">Vestimenta</option>
+                    <option value="4">Accesorios</option>
+                    <option value="5">Mascotas</option>
+                    <option value="6">Sexshop</option>
+                    <option value="7">Varios</option>
+                  </select>
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <label for="imagenModal">Link de la imagen</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="imagenModal"
+                    autofocus
+                    placeholder="https://img.ltwebstatic.com/images3_pi...."
+                    value=""
+                  />
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <label for="descuento_idModal">Ingresa un % de descuento</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="descuento_idModal"
+                    name="descuento_idModal"
+                    placeholder="10"
+                  />
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <label for="cantidadModal">Cantidad de productos</label>
+                  <input
+                    class="form-control"
+                    type="number"
+                    id="cantidadModal"
+                    name="cantidadModal"
+                    placeholder="6"
+                  />
                 </div>
               </div>
-              <button id="btnAgregarModal" class="btn btn-primary btn-lg btn-sm" type="button">
-                Guardar
-              </button>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-              Cerrar
+              Salir
+            </button>
+            <button type="button" class="btn btn-primary" onclick="editarProducto(event)">
+              Guardar cambios
             </button>
           </div>
         </div>
