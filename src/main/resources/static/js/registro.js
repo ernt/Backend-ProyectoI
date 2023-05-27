@@ -177,7 +177,7 @@ btnConfirm.addEventListener("click", async (event) => {
         },
         body: usuarioRegistrado,
       };
-      let res = await fetch("http://127.0.0.1:8080/api/usuarios/", RequestOptions);
+      let res = await fetch("/api/usuarios/", RequestOptions);
       let json = await res.json();
 
       if (res.ok) location.reload();
